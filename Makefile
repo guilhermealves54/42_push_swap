@@ -6,15 +6,15 @@
 #    By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 00:50:36 by gribeiro          #+#    #+#              #
-#    Updated: 2025/01/09 18:14:07 by gribeiro         ###   ########.fr        #
+#    Updated: 2025/01/09 18:38:07 by gribeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC 	= src/push_swap.c src/ft_split.c src/ft_atol.c src/ft_calloc.c src/ft_isdigit.c src/ft_checkerrors.c
+SRC 	= src/push_swap.c src/ft_split.c src/ft_atol.c src/ft_calloc.c src/ft_isdigit.c src/ft_checkerrors.c src/ft_atoi.c
 OBJS	= $(SRCS:.c=.o)
 
 CC = cc
-
+# CFLAGS = -Wall -Wextra -Werror
 
 
 test:

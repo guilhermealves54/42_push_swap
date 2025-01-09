@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 18:23:12 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/01/09 19:10:42 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int		main(int argc, char **argv)
 	t_node	*stack_b;
 	char	**list;
 	int		freeflag;
+	int		i = 0; // apagar
 
 	freeflag = 0;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
@@ -38,6 +39,8 @@ int		main(int argc, char **argv)
 	}
 	stack_a = fillstack (argc, list, 0);
 	stack_b = fillstack (argc, list, 1);
+	while (stack_a[i].index >= 0)
+		printf ("%i 	-	%i\n", stack_a[i].index, stack_a[i++].nbr);
 }
 
 static char	**filllist(char **argv, int *argc, int *freeflag)
@@ -57,13 +60,28 @@ static char	**filllist(char **argv, int *argc, int *freeflag)
 static t_node	*fillstack(int argc, char **list, int empty)
 {
 	t_node	*stack;
-	
+	int		i;
+
 	stack = ft_calloc (argc, sizeof(t_node));
 	if (stack == NULL)
 		return (NULL);
-	if (empty)
-		return (stack);
-
+	i = 0;
+	while (i < (argc - 1))
+	{
+		if (!empty)
+		{
+			stack[i].nbr = ft_atoi (list[i]);
+			stack[i].filled = 1;
+		}
+		else
+		{
+			stack[i].nbr = 0;
+			stack[i].filled = 0;
+		}
+		stack[i].index = i;
+		i++;
+	} 
+	stack[i + 1].index = -1;
 	return (stack);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:40:57 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 18:10:35 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:45:36 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ typedef struct s_node
 {
 	int				nbr;
 	int				index;
-	int				order;
-	struct s_node	*next;
-	struct s_node	*prev;
+	int				filled;
 }	t_node;
 
 // Functions
@@ -38,5 +36,6 @@ char	**ft_split(const char *s, char c);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isdigit(int n);
 int		ft_checkerrors(char **list, int argc);
+int		ft_atoi(const char *str);
 
 #endif
