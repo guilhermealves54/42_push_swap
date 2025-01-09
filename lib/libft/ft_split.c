@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gribeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 16:46:58 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 18:17:53 by gribeiro         ###   ########.fr       */
+/*   Updated: 2024/11/11 16:47:01 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stdlib.h"
 
 static int	words(const char *s, char c)
 {
@@ -102,3 +102,21 @@ char	**ft_split(const char *s, char c)
 		return (NULL);
 	return (wordv);
 }
+/*
+#include<stdio.h>
+int main(void)
+{
+	char    s[] = "  Hey Hey World!";
+	char    **sv;
+	size_t  i;
+
+	i = 0;
+	sv = ft_split(s, ' ');
+	printf ("%s\n", s);
+	while (sv[i] != NULL)
+	{
+		printf ("%s\n", sv[i]);
+		i++;
+	}
+	clean_mem(sv, i);
+}*/

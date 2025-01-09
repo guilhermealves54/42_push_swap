@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:44:26 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 18:17:38 by gribeiro         ###   ########.fr       */
+/*   Created: 2024/11/11 16:45:12 by gribeiro          #+#    #+#             */
+/*   Updated: 2025/01/09 17:19:29 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	*ft_calloc(size_t count, size_t size)
+int	ft_isdigit(int n)
 {
-	unsigned char	*tmp_ptr;
-	size_t			i;
-
-	i = 0;
-	tmp_ptr = malloc (count * size);
-	if (tmp_ptr == NULL)
-		return (NULL);
-	while (i < count * size)
+	if (n >= '0' && n <= '9')
 	{
-		tmp_ptr[i] = 0;
-		i++;
+		return (2048);
 	}
-	return (tmp_ptr);
+	return (0);
 }

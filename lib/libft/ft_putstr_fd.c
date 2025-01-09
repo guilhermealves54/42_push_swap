@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gribeiro <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 16:44:26 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 18:17:38 by gribeiro         ###   ########.fr       */
+/*   Created: 2024/11/13 14:34:10 by gribeiro          #+#    #+#             */
+/*   Updated: 2024/11/13 14:34:12 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	ft_putstr_fd(char *s, int fd)
 {
-	unsigned char	*tmp_ptr;
-	size_t			i;
+	size_t	i;
 
 	i = 0;
-	tmp_ptr = malloc (count * size);
-	if (tmp_ptr == NULL)
-		return (NULL);
-	while (i < count * size)
+	while (s[i] != '\0')
 	{
-		tmp_ptr[i] = 0;
+		write(fd, &s[i], 1);
 		i++;
 	}
-	return (tmp_ptr);
 }
+/*
+#include<stdio.h>
+int	main(void)
+{
+	ft_putstr_fd("Hello World!", 1);
+}*/

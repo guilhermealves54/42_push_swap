@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:40:57 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 02:54:17 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/01/09 18:10:35 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ typedef struct s_node
 
 // Functions
 
-int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
 char	**ft_split(const char *s, char c);
 void	*ft_calloc(size_t count, size_t size);
-
+int		ft_isdigit(int n);
+int		ft_checkerrors(char **list, int argc);
 
 #endif
