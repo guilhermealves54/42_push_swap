@@ -74,22 +74,53 @@ int		stacksize(t_node *stack_a)
 	return (res);
 }
 
+int		calc_btarget (t_node *stack_a, t_node *stack_b, int i)
+{
+	int		n;
+	int		pos_max;
+	int		pos_min;
+
+	// se i for maior que o maximo numero tem de ficar por cima.
+	// se i for menor que o minimo numero tem de ficar por baixo.
+	if (stack_a[i].nbr > stack_b[maxelem (stack_b)].nbr)
+		return (maxelem (stack_b));
+	else if (stack_a[i].nbr < stack_b[minelem (stack_b)].nbr)
+		return (maxelem (stack_b));
+	//se i for um valor intermedio tem de ficar no meio
+	//encontrar menor valor do stack b que esta mais proximo do valor ref.
+	n = 0;
+	pos_min = minelem (stack_b);
+	while (stack_b[n].index != -1)
+	{
+		if (stack_b[n].nbr < stack_a[i].nbr)
+		{
+			if (stack_b[n].nbr > stack_b[pos_min].nbr)
+				pos_min = n;
+		}
+		n++;
+	}
+	//o target e o valor maior mais proximo. o index podera ser colocado por cima.
+}
+
 int		cost(t_node *stack_a, t_node *stack_b, int i)
 {
-	int	mov_a;
-	int mov_b;
-	int	res;
+	int		mov_a;
+	int		mov_b;
+	int		b_target;
+	int		direction;
 
-	mov_a = i - stack_a[firstelem (stack_a)].index;		//calculo ra
-	if (stack_a[i].nbr > stack_b[maxelem (stack_b)].nbr)
-		mov_b = maxelem (stack_b) - firstelem (stack_b);	//calculo rb
-	else if (stack_a[i].nbr < stack_b[minelem (stack_b)].nbr)
-		mov_b = minelem (stack_b) - firstelem (stack_b);	//calculo rb
-	if (mov_a > mov_b)
-		return ((mov_a - mov_b) + 1);	//calculo movimentos simultaneos com rr
-
-		//ter em contas movimentos contrarios tambem
-
+	direction = 0;
+	if (i > (stacksize (stack_a) / 2))
+		mov_a = stacksize (stack_a) - i;
+	else
+		mov_a = i;
+	b_target = calc_btarget (stack_a, stack_b, i);
+	if (b_target > (stacksize (stack_b) / 2))
+		mov_b = stacksize (stack_b) - b_target;
+	else
+		mov_b = b_target;
+	// falta calcular direcao movimento para calcular movimentos conjuntos
+	return (mov_a + mov_b);
 }
 
 static int 	biggersort (t_node *stack_a, t_node *stack_b)
