@@ -2,7 +2,7 @@
 
 static int ft_checkduplicates (char **list);
 
-int	ft_checkerrors(char **list, int argc)
+int	ft_checkerrors(char **list)
 {
 	int		i;
 	int		n;

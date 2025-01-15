@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/09 22:26:44 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/01/15 00:08:58 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		main(int argc, char **argv)
 	list = argv;
 	if (argc == 2)
 		list = filllist (argv, &argc, &freeflag);
-	if (ft_checkerrors (list, argc))
+	if (ft_checkerrors (list))
 	{
 		if (freeflag)
 			free (list);
