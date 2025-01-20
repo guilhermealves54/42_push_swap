@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/15 00:08:58 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/01/15 22:24:31 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static char		**filllist(char **argv, int *argc, int *freeflag);
 static t_node	*fillstack(int argc, char **list, int empty);
-static void		freemem(char **list, t_node *stack_a, t_node *stack_b, int freeflag);
+static void		freemem(char **list, t_node *st_a, t_node *st_b, int freeflag);
 
 int		main(int argc, char **argv)
 {
-	t_node	*stack_a;
-	t_node	*stack_b;
+	t_node	*st_a;
+	t_node	*st_b;
 	char	**list;
 	int		freeflag;
 
@@ -36,13 +36,13 @@ int		main(int argc, char **argv)
 			free (list);
 		return (write (1, "Error\n", 6), 0);
 	}
-	stack_a = fillstack (argc, list, 0);
-	stack_b = fillstack (argc, list, 1);
-	if (stack_a == NULL || stack_b == NULL)
+	st_a = fillstack (argc, list, 0);
+	st_b = fillstack (argc, list, 1);
+	if (st_a == NULL || st_b == NULL)
 		return (1);
-	if (!sorted (stack_a))
-		sortstack (stack_a, stack_b, argc);
-	freemem (list, stack_a, stack_b, freeflag);
+	if (!sorted (st_a))
+		sortstack (st_a, st_b, argc);
+	freemem (list, st_a, st_b, freeflag);
 }
 
 static char	**filllist(char **argv, int *argc, int *freeflag)
@@ -80,17 +80,17 @@ static t_node	*fillstack(int argc, char **list, int empty)
 			stack[i].nbr = 0;
 			stack[i].filled = 0;
 		}
-		stack[i].index = i;
+		stack[i].idx = i;
 		i++;
 	} 
-	stack[i].index = -1;
+	stack[i].idx = -1;
 	return (stack);
 }
 
-static void freemem (char **list, t_node *stack_a, t_node *stack_b, int freeflag)
+static void freemem (char **list, t_node *st_a, t_node *st_b, int freeflag)
 {
 	if (freeflag)
 		free (list);
-	free (stack_a);
-	free (stack_b);
+	free (st_a);
+	free (st_b);
 }

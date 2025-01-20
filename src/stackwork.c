@@ -1,24 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stackwork.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/15 15:09:43 by gribeiro          #+#    #+#             */
+/*   Updated: 2025/01/16 21:46:02 by gribeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int		calc_btarget(t_node *stack_a, t_node *stack_b, int target_a)
+int		calc_btarget(t_node *st_a, t_node *st_b, int target_a)
 {
 	int		i;
 	int		target_b;
 
-	if (emptystack (stack_b) == 1)
+	if (emptystack (st_b) == 1)
 		return (0);
-	if (stack_a[target_a].nbr > stack_b[maxelem (stack_b)].nbr)
-		return (maxelem (stack_b));
-	else if (stack_a[target_a].nbr < stack_b[minelem (stack_b)].nbr)
-		return (maxelem(stack_b));
+	if (st_a[target_a].nbr > st_b[maxelem (st_b)].nbr)
+		return (maxelem (st_b));
+	else if (st_a[target_a].nbr < st_b[minelem (st_b)].nbr)
+		return (maxelem(st_b));
 	i = 0;
-	target_b = minelem(stack_b);
-	while (stack_b[i].index != -1)
+	target_b = minelem(st_b);
+	while (st_b[i].idx != -1)
 	{
-		if (stack_b[i].filled == 1)
+		if (st_b[i].filled == 1)
 		{
-			if ((stack_b[i].nbr < stack_a[target_a].nbr 
-				&& stack_b[i].nbr > stack_b[target_b].nbr))
+			if ((st_b[i].nbr < st_a[target_a].nbr 
+				&& st_b[i].nbr > st_b[target_b].nbr))
 					target_b = i;
 		}
 		i++;
@@ -26,111 +38,120 @@ int		calc_btarget(t_node *stack_a, t_node *stack_b, int target_a)
 	return (target_b);
 }
 
-int		cost(t_node *stack_a, t_node *stack_b, int target_a, int target_b)
+static int	mv_same_dir (t_node *st_a, t_node *st_b, int target_a, int target_b)
 {
-	int		median_a;
-	int		median_b;
-	int		mov_a;
-	int		mov_b;
+	int mdn_a;
+	int mdn_b;
 
-	median_a = ((stack_a[lastelem (stack_a)].index - stack_a[firstelem (stack_a)].index) / 2) + firstelem (stack_a);
-	median_b = ((stack_b[lastelem (stack_b)].index - stack_b[firstelem (stack_b)].index) / 2) + firstelem (stack_b);
-	if (stack_a[target_a].index <= stack_a[median_a].index)
-		mov_a = stack_a[target_a].index - stack_a[firstelem (stack_a)].index;
-	if (stack_a[target_a].index > stack_a[median_a].index)
-		mov_a = (stack_a[lastelem (stack_a)].index - stack_a[target_a].index) + 1;
-	mov_a++;
-	if (emptystack (stack_b))
-		return (mov_a);
-	if (stack_b[target_b].index <= stack_b[median_b].index)
-		mov_b = stack_b[target_b].index - stack_b[firstelem (stack_b)].index;
-	if (stack_b[target_b].index > stack_b[median_b].index)
-		mov_b = (stack_b[lastelem (stack_b)].index - stack_b[target_b].index) + 1;
-	if (((stack_a[target_a].index <= stack_a[median_a].index 
-			&& stack_b[target_b].index <= stack_b[median_b].index)
-			|| (stack_a[target_a].index > stack_a[median_a].index
-			&& stack_b[target_b].index > stack_b[median_b].index)) 
-			&& stack_a[target_a].index != stack_a[firstelem (stack_a)].index)
-	{
-		if (mov_a > mov_b)
-			return (mov_a + 1);
-		else
-			return (mov_b + 1);
-	}
-		return (mov_a + mov_b);
-}
-
-
-int		push_element(t_node *stack_a, t_node *stack_b, int min_a, int target_b)
-{
-	int		median_a;
-	int		median_b;
-	int		trgnum_a;
-	int		trgnum_b;
-	
-	trgnum_a = stack_a[min_a].nbr;
-	trgnum_b = stack_b[target_b].nbr;
-	median_a = ((stack_a[lastelem (stack_a)].index - stack_a[firstelem (stack_a)].index) / 2) + firstelem (stack_a);
-	median_b = ((stack_b[lastelem (stack_b)].index - stack_b[firstelem (stack_b)].index) / 2) + firstelem (stack_b);
-	
-	if ((stack_a[min_a].index <= stack_a[median_a].index
-			&& stack_b[target_b].index <= stack_b[median_b].index) 
-			&& (stack_a[min_a].nbr != stack_a[firstelem (stack_a)].nbr) 
-			&& (stack_b[target_b].nbr != stack_b[firstelem (stack_b)].nbr))
-	{
-		while (stack_a[firstelem (stack_a)].nbr != trgnum_a && stack_b[firstelem (stack_b)].nbr != trgnum_b)
-				rr (stack_a, stack_b);
-	}
-	if ((stack_a[min_a].index > stack_a[median_a].index
-			&& stack_b[target_b].index > stack_b[median_b].index)
-			&& (stack_a[min_a].nbr != stack_a[firstelem (stack_a)].nbr) 
-			&& (stack_b[target_b].nbr != stack_b[firstelem (stack_b)].nbr))
-	{
-		while (stack_a[firstelem (stack_a)].nbr != trgnum_a && stack_b[firstelem (stack_b)].nbr != trgnum_b)
-				rrr (stack_a, stack_b);
-	}
-	if (stack_a[min_a].index <= stack_a[median_a].index)
-	{
-		while (stack_a[firstelem (stack_a)].nbr != trgnum_a)
-			ra (stack_a);
-	}
-	if (stack_a[min_a].index > stack_a[median_a].index)
-	{
-		while (stack_a[firstelem (stack_a)].nbr != trgnum_a)
-			rra (stack_a);
-	}	
-	if (stack_b[target_b].index <= stack_b[median_b].index)
-	{
-		while (stack_b[firstelem (stack_b)].nbr != trgnum_b)
-			rb (stack_b);
-	}
-	if (stack_b[target_b].index > stack_b[median_b].index)
-	{
-		while (stack_b[firstelem (stack_b)].nbr != trgnum_b)
-			rrb (stack_b);
-	}		
-	if (stack_a[firstelem(stack_a)].nbr == trgnum_a && stack_b[firstelem (stack_b)].nbr == trgnum_b)
-		pb (stack_a, stack_b);
+	mdn_a = ((st_a[lstelm(st_a)].idx-st_a[fstelm(st_a)].idx)/2)+fstelm(st_a);
+	mdn_b = ((st_b[lstelm(st_b)].idx-st_b[fstelm(st_b)].idx)/2)+fstelm(st_b);
+	if (((st_a[target_a].idx <= st_a[mdn_a].idx 
+			&& st_b[target_b].idx <= st_b[mdn_b].idx)
+			|| (st_a[target_a].idx > st_a[mdn_a].idx
+			&& st_b[target_b].idx > st_b[mdn_b].idx)) 
+			&& st_a[target_a].idx != st_a[fstelm (st_a)].idx)
+		return (1);
 	return (0);
 }
 
-int		calc_atarget (t_node *stack_a, t_node *stack_b, int target_b)
+int		cost(t_node *st_a, t_node *st_b, int target_a, int target_b)
+{
+	int		mdn_a;
+	int		mdn_b;
+	int		mov_a;
+	int		mov_b;
+
+	mdn_a = ((st_a[lstelm(st_a)].idx-st_a[fstelm(st_a)].idx)/2)+fstelm(st_a);
+	mdn_b = ((st_b[lstelm(st_b)].idx-st_b[fstelm(st_b)].idx)/2)+fstelm(st_b);
+	if (st_a[target_a].idx <= st_a[mdn_a].idx)
+		mov_a = st_a[target_a].idx - st_a[fstelm (st_a)].idx;
+	if (st_a[target_a].idx > st_a[mdn_a].idx)
+		mov_a = (st_a[lstelm (st_a)].idx - st_a[target_a].idx) + 1;
+	mov_a++;
+	if (emptystack (st_b))
+		return (mov_a);
+	if (st_b[target_b].idx <= st_b[mdn_b].idx)
+		mov_b = st_b[target_b].idx - st_b[fstelm (st_b)].idx;
+	if (st_b[target_b].idx > st_b[mdn_b].idx)
+		mov_b = (st_b[lstelm (st_b)].idx - st_b[target_b].idx) + 1;
+	if (mv_same_dir (st_a, st_b, target_a, target_b))
+	{
+		if (mov_a > mov_b)
+			return (mov_a + 1);
+		return (mov_b + 1);
+	}
+		return (mov_a + mov_b);
+}
+void	rr_rrr(t_node *st_a, t_node *st_b, int min_a, int target_b)
+{
+	int		mdn_a;
+	int		mdn_b;
+	int		trgnum_a;
+	int		trgnum_b;
+	
+	trgnum_a = st_a[min_a].nbr;
+	trgnum_b = st_b[target_b].nbr;
+	mdn_a = ((st_a[lstelm(st_a)].idx-st_a[fstelm(st_a)].idx)/2)+fstelm(st_a);
+	mdn_b = ((st_b[lstelm(st_b)].idx-st_b[fstelm(st_b)].idx)/2)+fstelm(st_b);
+	if ((st_a[min_a].idx <= st_a[mdn_a].idx
+			&& st_b[target_b].idx <= st_b[mdn_b].idx) 
+			&& (st_a[min_a].nbr != st_a[fstelm (st_a)].nbr) 
+			&& (st_b[target_b].nbr != st_b[fstelm (st_b)].nbr))
+		while (st_a[fstelm (st_a)].nbr != trgnum_a && st_b[fstelm (st_b)].nbr != trgnum_b)
+				rr (st_a, st_b);
+	if ((st_a[min_a].idx > st_a[mdn_a].idx
+			&& st_b[target_b].idx > st_b[mdn_b].idx)
+			&& (st_a[min_a].nbr != st_a[fstelm (st_a)].nbr) 
+			&& (st_b[target_b].nbr != st_b[fstelm (st_b)].nbr))
+		while (st_a[fstelm (st_a)].nbr != trgnum_a && st_b[fstelm (st_b)].nbr != trgnum_b)
+				rrr (st_a, st_b);	
+}
+
+void	push_element(t_node *st_a, t_node *st_b, int min_a, int target_b)
+{
+	int		mdn_a;
+	int		mdn_b;
+	int		trgnum_a;
+	int		trgnum_b;
+	
+	trgnum_a = st_a[min_a].nbr;
+	trgnum_b = st_b[target_b].nbr;
+	mdn_a = ((st_a[lstelm(st_a)].idx-st_a[fstelm(st_a)].idx)/2)+fstelm(st_a);
+	mdn_b = ((st_b[lstelm(st_b)].idx-st_b[fstelm(st_b)].idx)/2)+fstelm(st_b);
+	rr_rrr (st_a, st_b, min_a, target_b);
+	if (st_a[min_a].idx <= st_a[mdn_a].idx)
+		while (st_a[fstelm (st_a)].nbr != trgnum_a)
+			ra (st_a);
+	if (st_a[min_a].idx > st_a[mdn_a].idx)
+		while (st_a[fstelm (st_a)].nbr != trgnum_a)
+			rra (st_a);
+	if (st_b[target_b].idx <= st_b[mdn_b].idx)
+		while (st_b[fstelm (st_b)].nbr != trgnum_b)
+			rb (st_b);
+	if (st_b[target_b].idx > st_b[mdn_b].idx)
+		while (st_b[fstelm (st_b)].nbr != trgnum_b)
+			rrb (st_b);	
+	if (st_a[fstelm(st_a)].nbr == trgnum_a && st_b[fstelm (st_b)].nbr == trgnum_b)
+		pb (st_a, st_b);
+}
+
+int		calc_atarget (t_node *st_a, t_node *st_b, int target_b)
 {
 	int		i;
 	int		target_a;
 
-	if (stack_b[target_b].nbr > stack_a[maxelem (stack_a)].nbr)
-		return (minelem (stack_a));
-	else if (stack_b[target_b].nbr < stack_a[minelem (stack_a)].nbr)
-		return (minelem(stack_a));
+	if (st_b[target_b].nbr > st_a[maxelem (st_a)].nbr)
+		return (minelem (st_a));
+	else if (st_b[target_b].nbr < st_a[minelem (st_a)].nbr)
+		return (minelem(st_a));
 	i = 0;
-	target_a = maxelem(stack_a);
-	while (stack_a[i].index != -1)
+	target_a = maxelem(st_a);
+	while (st_a[i].idx != -1)
 	{
-		if (stack_a[i].filled == 1)
+		if (st_a[i].filled == 1)
 		{
-			if ((stack_a[i].nbr > stack_b[target_b].nbr 
-				&& stack_a[i].nbr < stack_a[target_a].nbr))
+			if ((st_a[i].nbr > st_b[target_b].nbr 
+				&& st_a[i].nbr < st_a[target_a].nbr))
 					target_a = i;
 		}
 		i++;
@@ -138,69 +159,69 @@ int		calc_atarget (t_node *stack_a, t_node *stack_b, int target_b)
 	return (target_a);
 }
 
-void	push_btoa(t_node *stack_a, t_node *stack_b, int target_a, int target_b)
+void	push_btoa(t_node *st_a, t_node *st_b, int target_a, int target_b)
 {
-	int		median_a;
-	int		median_b;
+	int		mdn_a;
+	int		mdn_b;
 	int		trgnum_a;
 	int		trgnum_b;
 
-	median_a = ((stack_a[lastelem (stack_a)].index - stack_a[firstelem (stack_a)].index) / 2) + firstelem (stack_a);
-	median_b = ((stack_b[lastelem (stack_b)].index - stack_b[firstelem (stack_b)].index) / 2) + firstelem (stack_b);
-	trgnum_a = stack_a[target_a].nbr;
-	trgnum_b = stack_b[target_b].nbr;
-	while (stack_a[firstelem (stack_a)].nbr != trgnum_a)
+	mdn_a = ((st_a[lstelm (st_a)].idx - st_a[fstelm (st_a)].idx) / 2) + fstelm (st_a);
+	mdn_b = ((st_b[lstelm (st_b)].idx - st_b[fstelm (st_b)].idx) / 2) + fstelm (st_b);
+	trgnum_a = st_a[target_a].nbr;
+	trgnum_b = st_b[target_b].nbr;
+	while (st_a[fstelm (st_a)].nbr != trgnum_a)
 	{
-		if (stack_a[target_a].index <= stack_a[median_a].index)
-			ra (stack_a);
+		if (st_a[target_a].idx <= st_a[mdn_a].idx)
+			ra (st_a);
 		else
-			rra (stack_a);
+			rra (st_a);
 	}
-	while (stack_b[firstelem (stack_b)].nbr != trgnum_b)
+	while (st_b[fstelm (st_b)].nbr != trgnum_b)
 	{
-		if (stack_b[target_b].index <= stack_b[median_b].index)
-			rb (stack_b);
+		if (st_b[target_b].idx <= st_b[mdn_b].idx)
+			rb (st_b);
 		else
-			rrb (stack_b);
+			rrb (st_b);
 	}	
-	pa (stack_a, stack_b);
+	pa (st_a, st_b);
 }
 
-int		org_a (t_node *stack_a)
+int		org_a (t_node *st_a)
 {
 	int		min_a;
 	int		min_i;
-	int		median_a;
+	int		mdn_a;
 
-	min_a = stack_a[minelem (stack_a)].nbr;
-	min_i = stack_a[minelem (stack_a)].index;
-	median_a = ((stack_a[lastelem (stack_a)].index - stack_a[firstelem (stack_a)].index) / 2) + firstelem (stack_a);
-	if (stack_a[min_i].index <= stack_a[median_a].index)
+	min_a = st_a[minelem (st_a)].nbr;
+	min_i = st_a[minelem (st_a)].idx;
+	mdn_a = ((st_a[lstelm (st_a)].idx - st_a[fstelm (st_a)].idx) / 2) + fstelm (st_a);
+	if (st_a[min_i].idx <= st_a[mdn_a].idx)
 	{
-		while (stack_a[firstelem (stack_a)].nbr != min_a)
-			ra (stack_a);
+		while (st_a[fstelm (st_a)].nbr != min_a)
+			ra (st_a);
 	}
 	else
-		while (stack_a[firstelem (stack_a)].nbr != min_a)
-			rra (stack_a);
+		while (st_a[fstelm (st_a)].nbr != min_a)
+			rra (st_a);
 	return (0);
 }
 
-int		back_to_a(t_node *stack_a, t_node *stack_b)
+int		back_to_a(t_node *st_a, t_node *st_b)
 {
 	int		target_a;
 	int		i;
 
 	i = 0;
-	while (stack_b[i].index != -1)
+	while (st_b[i].idx != -1)
 	{
-		if (stack_b[i].filled == 1)
+		if (st_b[i].filled == 1)
 		{
-			target_a = calc_atarget (stack_a, stack_b, i);
-			push_btoa (stack_a, stack_b, target_a, i);
+			target_a = calc_atarget (st_a, st_b, i);
+			push_btoa (st_a, st_b, target_a, i);
 		}
 		i++;
 	}
-	org_a (stack_a);
+	org_a (st_a);
 	return (0);
 }

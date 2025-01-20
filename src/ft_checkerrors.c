@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_checkerrors.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/15 15:09:25 by gribeiro          #+#    #+#             */
+/*   Updated: 2025/01/15 22:24:23 by gribeiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int ft_checkduplicates (char **list);
@@ -46,4 +58,18 @@ static int ft_checkduplicates (char **list)
         i++;
     }
     return (0);
+}
+
+int		sorted(t_node *st_a)
+{
+	int		i;
+
+	i = 1;
+	while (st_a[i].idx != -1)
+	{
+		if (st_a[i].nbr < st_a[i - 1].nbr)
+			return (0);
+		i++;
+	}
+	return (1);
 }
