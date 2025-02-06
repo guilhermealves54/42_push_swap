@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/06 00:58:32 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:07:43 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 
 	freeflag = 0;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (write (2, "Error\n", 6), 0);
+		return (write (2, "Error\n", 6), 1);
 	argv++;
 	list = argv;
 	if (argc == 2)
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	{
 		if (freeflag)
 			free (list);
-		return (write (2, "Error\n", 6), 0);
+		return (write (2, "Error\n", 6), 1);
 	}
 	st_a = fillstack (argc, list, 0);
 	st_b = fillstack (argc, list, 1);
