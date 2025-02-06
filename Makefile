@@ -6,12 +6,12 @@
 #    By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 00:50:36 by gribeiro          #+#    #+#              #
-#    Updated: 2025/02/05 22:27:49 by gribeiro         ###   ########.fr        #
+#    Updated: 2025/02/06 01:41:24 by gribeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-SRC	= src/push_swap.c src/ft_split.c src/ft_atol.c src/ft_calloc.c src/ft_isdigit.c src/ft_atoi.c src/ft_checkerrors.c src/ft_sortstack.c src/ft_checks.c src/operations.c src/stackwork.c
+SRC	= $(addprefix src/, push_swap.c ft_split.c ft_libfuncs.c ft_checkerrors.c ft_sortstack.c ft_checks.c ops.c stackwork.c stackwork2.c ops2.c)
 OBJS = $(SRC:.c=.o)
 
 CC = cc
@@ -43,6 +43,7 @@ checker: $(NAME)
 		chmod 777 checker_linux; \
 	fi
 	ARG="4 10 1 3 2"; ./push_swap $$ARG | ./checker_linux $$ARG
+	ARG="2336 -2798 -2604 -2775 10 5 3 1"; ./push_swap $$ARG | ./checker_linux $$ARG
 
 clean:
 	rm -f $(OBJS)

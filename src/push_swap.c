@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/05 16:01:50 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:58:32 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static char		**filllist(char **argv, int *argc, int *freeflag);
 static t_node	*fillstack(int argc, char **list, int empty);
 static void		freemem(char **list, t_node *st_a, t_node *st_b, int freeflag);
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_node	*st_a;
 	t_node	*st_b;
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 
 	freeflag = 0;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (write (2, "Error\n", 6), 0);;
+		return (write (2, "Error\n", 6), 0);
 	argv++;
 	list = argv;
 	if (argc == 2)
@@ -38,7 +38,7 @@ int		main(int argc, char **argv)
 	}
 	st_a = fillstack (argc, list, 0);
 	st_b = fillstack (argc, list, 1);
- 	if (st_a == NULL || st_b == NULL)
+	if (st_a == NULL || st_b == NULL)
 		return (1);
 	if (!sorted (st_a))
 		sortstack (st_a, st_b, argc);
@@ -82,12 +82,12 @@ static t_node	*fillstack(int argc, char **list, int empty)
 		}
 		stack[i].idx = i;
 		i++;
-	} 
+	}
 	stack[i].idx = -1;
 	return (stack);
 }
 
-static void freemem (char **list, t_node *st_a, t_node *st_b, int freeflag)
+static void	freemem(char **list, t_node *st_a, t_node *st_b, int freeflag)
 {
 	int		i;
 

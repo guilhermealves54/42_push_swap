@@ -6,15 +6,15 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:09:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/05 15:08:56 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/06 01:19:25 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int		fstelm (t_node *stack)
+int	fs_e(t_node *stack)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (stack[i].idx != -1)
@@ -28,9 +28,9 @@ int		fstelm (t_node *stack)
 	return (i);
 }
 
-int		lstelm (t_node *stack)
+int	ls_e(t_node *stack)
 {
-	int 	i;
+	int	i;
 
 	i = 0;
 	while (stack[i].idx != -1)
@@ -40,13 +40,13 @@ int		lstelm (t_node *stack)
 	return (i);
 }
 
-int		minelem (t_node *stack)
+int	minelem(t_node *stack)
 {
-	int 	i;
-	int		min;
-	int		minindex;
+	int	i;
+	int	min;
+	int	minindex;
 
-	i = fstelm (stack);
+	i = fs_e (stack);
 	min = stack[i].nbr;
 	minindex = i;
 	while (stack[i].idx != -1)
@@ -61,13 +61,13 @@ int		minelem (t_node *stack)
 	return (minindex);
 }
 
-int		maxelem (t_node *stack)
+int	maxelem(t_node *stack)
 {
-	int 	i;
-	int		max;
-	int		maxindex;
+	int	i;
+	int	max;
+	int	maxindex;
 
-	i = fstelm (stack);
+	i = fs_e (stack);
 	max = stack[i].nbr;
 	maxindex = i;
 	while (stack[i].idx != -1)
@@ -82,21 +82,7 @@ int		maxelem (t_node *stack)
 	return (maxindex);
 }
 
-int		emptystack (t_node *stack)
-{
-	int i;
-
-	i = 0;
-	while (stack[i].idx != -1)
-	{
-		if (stack[i].filled == 1)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int		stacksize(t_node *st_a)
+int	stacksize(t_node *st_a)
 {
 	int		i;
 	int		res;

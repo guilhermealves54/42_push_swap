@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:09:16 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/05 16:03:17 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/06 01:19:25 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void	sort3(t_node *stack)
 {
 	while (!sorted (stack))
 	{
-		if (stack[fstelm (stack)].nbr == stack[maxelem (stack)].nbr)
+		if (stack[fs_e (stack)].nbr == stack[maxelem (stack)].nbr)
 			ra (stack);
-		else if (stack[lstelm (stack)].nbr == stack[maxelem (stack)].nbr)
+		else if (stack[ls_e (stack)].nbr == stack[maxelem (stack)].nbr)
 			sa (stack);
 		else
 			rra (stack);
@@ -33,7 +33,7 @@ static void	a_to_b(t_node *st_a, t_node *st_b, int *min_a, int *min_b)
 
 	while (stacksize(st_a) > 3)
 	{
-		i = fstelm (st_a);
+		i = fs_e (st_a);
 		mn_cst = cost (st_a, st_b, i, calc_btarget (st_a, st_b, i));
 		while (st_a[i].idx != -1)
 		{
@@ -81,4 +81,19 @@ int	sortstack(t_node *st_a, t_node *st_b, int argc)
 	else
 		return (biggersort (st_a, st_b));
 	return (0);
+}
+
+void	sa(t_node *stack)
+{
+	int	temp;
+	int	i;
+
+	i = fs_e (stack);
+	if (stack[i + 1].filled == 1)
+	{
+		temp = stack[i].nbr;
+		stack[i].nbr = stack[i + 1].nbr;
+		stack[i + 1].nbr = temp;
+		write (1, "sa\n", 3);
+	}
 }

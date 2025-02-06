@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:40:57 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/05 21:51:39 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/06 01:31:27 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ int		calc_atarget(t_node *st_a, t_node *st_b, int target_b);
 void	push_btoa(t_node *st_a, t_node *st_b, int target_a, int target_b);
 int		org_a(t_node *st_a);
 int		back_to_a(t_node *st_a, t_node *st_b);
+void	push_up(t_node *st);
 
 //	check elements in stack
 
-int		fstelm(t_node *stack);
-int		lstelm(t_node *stack);
+int		fs_e(t_node *stack);
+int		ls_e(t_node *stack);
 int		minelem(t_node *stack);
 int		maxelem(t_node *stack);
 int		emptystack(t_node *stack);
