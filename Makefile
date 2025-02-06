@@ -3,36 +3,52 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+         #
+#    By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 00:50:36 by gribeiro          #+#    #+#              #
-#    Updated: 2025/01/15 14:51:26 by gribeiro         ###   ########.fr        #
+#    Updated: 2025/02/05 22:27:49 by gribeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC	=	src/push_swap.c src/ft_split.c src/ft_atol.c src/ft_calloc.c src/ft_isdigit.c src/ft_atoi.c src/ft_checkerrors.c src/ft_sortstack.c src/ft_checks.c src/operations.c src/stackwork.c
-OBJS	=	$(SRCS:.c=.o)
+NAME = push_swap
+SRC	= src/push_swap.c src/ft_split.c src/ft_atol.c src/ft_calloc.c src/ft_isdigit.c src/ft_atoi.c src/ft_checkerrors.c src/ft_sortstack.c src/ft_checks.c src/operations.c src/stackwork.c
+OBJS = $(SRC:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-$(NAME):
-	$(OBJS)
-	ar rcs ${NAME} ${OBJS}
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-test:
-	cc $(SRC) $(CFLAGS) -o push_swap.out
-	./push_swap.out 2336 -2798 -2604 -2775 841 2479 3713 4382 418 2529 -3889 1045 -1457 -742 -299 2193 -4012 -2915 693 1281 2535 -3499 -4392 4655 281 1152 -4810 2166 -2298 -1454
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-all:
-	$(NAME)
+all: $(NAME)
+
+test: $(NAME)
+	./push_swap 2336 -2798 -2604 -2775 10 5 3 1
+
+valgrind: $(NAME)
+	valgrind ./push_swap "2336 -2798 -2604 -2775 10 5 3 1"
+
+error: $(NAME)
+	./push_swap 9 6 9 3
+	./push_swap 10b 7 3 4
+	./push_swap -+3 2 1 6
+
+checker: $(NAME)
+	@if [ ! -f checker_linux ]; then \
+		echo "Downloading checker_linux..."; \
+		curl -o checker_linux https://cdn.intra.42.fr/document/document/28341/checker_linux; \
+		chmod 777 checker_linux; \
+	fi
+	ARG="4 10 1 3 2"; ./push_swap $$ARG | ./checker_linux $$ARG
 
 clean:
 	rm -f $(OBJS)
 
-fclean:
-	clean
+fclean: clean
 	rm -f $(NAME)
 
-re:
-	fclean all
+re: fclean all
+	

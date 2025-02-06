@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/15 22:24:31 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:01:50 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		main(int argc, char **argv)
 
 	freeflag = 0;
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (write (1, "Error\n", 6), 0);;
+		return (write (2, "Error\n", 6), 0);;
 	argv++;
 	list = argv;
 	if (argc == 2)
@@ -34,11 +34,11 @@ int		main(int argc, char **argv)
 	{
 		if (freeflag)
 			free (list);
-		return (write (1, "Error\n", 6), 0);
+		return (write (2, "Error\n", 6), 0);
 	}
 	st_a = fillstack (argc, list, 0);
 	st_b = fillstack (argc, list, 1);
-	if (st_a == NULL || st_b == NULL)
+ 	if (st_a == NULL || st_b == NULL)
 		return (1);
 	if (!sorted (st_a))
 		sortstack (st_a, st_b, argc);
@@ -89,8 +89,17 @@ static t_node	*fillstack(int argc, char **list, int empty)
 
 static void freemem (char **list, t_node *st_a, t_node *st_b, int freeflag)
 {
+	int		i;
+
+	i = 0;
 	if (freeflag)
+	{
+		while (list[i])
+		{
+			free(list[i++]);
+		}
 		free (list);
+	}
 	free (st_a);
 	free (st_b);
 }

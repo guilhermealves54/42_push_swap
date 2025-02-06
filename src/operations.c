@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:09:37 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/16 22:01:08 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:07:17 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	rb(t_node *stack)
 	write (1, "rb\n", 3);
 }
 
-void	pb (t_node *st_a, t_node *st_b)
+void	pb(t_node *st_a, t_node *st_b)
 {
 	int	i;
 
@@ -117,9 +117,13 @@ void	pb (t_node *st_a, t_node *st_b)
 		{
 			st_b[i + 1].nbr = st_b[i].nbr;
 			st_b[i + 1].filled = st_b[i].filled;
+			if (i == 0)
+				break ;
 			i--;
 		}
-		i = fstelm (st_b) - 1;
+		i = fstelm (st_b);
+		if (i > 0)
+			i--;
 		st_b[i].nbr = st_a[fstelm (st_a)].nbr;
 		st_b[i].filled = 1;
 		st_a[fstelm (st_a)].nbr = 0;
@@ -160,6 +164,8 @@ void 	pa (t_node *st_a, t_node *st_b)
 	{
 		st_a[i + 1].nbr = st_a[i].nbr;
 		st_a[i + 1].filled = st_a[i].filled;
+		if (i == 0)
+			break ;
 		i--;
 	}
 	i = 0;

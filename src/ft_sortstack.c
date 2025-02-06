@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_sortstack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gribeiro <gribeiro@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:09:16 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/01/15 22:24:31 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:03:17 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ static int	biggersort(t_node *st_a, t_node *st_b)
 	int		min_a;
 	int		min_b;
 
+	if (stacksize(st_a) == 4)
+	{
+		pb (st_a, st_b);
+		sort3 (st_a);
+		return (back_to_a (st_a, st_b));
+	}
 	pb (st_a, st_b);
 	pb (st_a, st_b);
 	a_to_b (st_a, st_b, &min_a, &min_b);
