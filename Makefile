@@ -40,11 +40,14 @@ error: $(NAME)
 	./push_swap -+3 2 1 6
 
 visualizer:	$(NAME)
-	printf "\033[0;32mDownloading Push_swap Visualizer...\033[0m"
-	git clone https://github.com/o-reo/push_swap_visualizer.git
-	mkdir push_swap_visualizer/build
-	cd push_swap_visualizer/build && cmake .. && make
-	./bin/visualizer
+	@if [ ! -d push_swap_visualizer ]; then \
+		printf "\033[0;32mDownloading Push_swap Visualizer...\033[0m"; \
+		git clone https://github.com/o-reo/push_swap_visualizer.git; \
+		mkdir push_swap_visualizer/build; \
+		cd push_swap_visualizer/build && cmake .. && make && ./bin/visualizer; \
+	else \
+		cd push_swap_visualizer/build && ./bin/visualizer; \
+	fi
 
 checker: $(NAME)
 	@if [ ! -f checker_linux ]; then \
