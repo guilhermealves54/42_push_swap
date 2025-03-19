@@ -6,7 +6,7 @@
 #    By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 00:50:36 by gribeiro          #+#    #+#              #
-#    Updated: 2025/03/19 17:20:16 by gribeiro         ###   ########.fr        #
+#    Updated: 2025/03/19 17:27:17 by gribeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME = push_swap
 
 # Source files and object files
-SRC = src/ft_checkerrors.c ft_checks.c ft_libfuncs.c ft_sortstack.c ft_split.c ops.c ops2.c push_swap.c stackwork.c stackwork2.c
+SRC = src/ft_checkerrors.c src/ft_checks.c src/ft_libfuncs.c src/ft_sortstack.c src/ft_split.c src/ops.c src/ops2.c src/push_swap.c src/stackwork.c src/stackwork2.c
 OBJS = $(SRC:.c=.o)
 
 # Compiler and flags
@@ -57,7 +57,7 @@ visualizer:	$(NAME)
 checker: $(NAME)
 	@if [ ! -f checker_linux ]; then \
 		printf "\033[0;32mDownloading checker_linux...\033[0m"; \
-		curl -o checker_linux https://cdn.intra.42.fr/document/document/28341/checker_linux; \
+		curl -o checker_linux https://cdn.intra.42.fr/document/document/31367/checker_linux; \
 		chmod 777 checker_linux; \
 	fi
 
