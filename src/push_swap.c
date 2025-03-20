@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/06 18:07:43 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:28:40 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static char		**filllist(char **argv, int *argc, int *freeflag);
 static t_node	*fillstack(int argc, char **list, int empty);
+static void		freelist(char **list);
 static void		freemem(char **list, t_node *st_a, t_node *st_b, int freeflag);
 
 int	main(int argc, char **argv)
@@ -33,7 +34,7 @@ int	main(int argc, char **argv)
 	if (ft_checkerrors (list))
 	{
 		if (freeflag)
-			free (list);
+			freelist (list);
 		return (write (2, "Error\n", 6), 1);
 	}
 	st_a = fillstack (argc, list, 0);
@@ -85,6 +86,18 @@ static t_node	*fillstack(int argc, char **list, int empty)
 	}
 	stack[i].idx = -1;
 	return (stack);
+}
+
+static void	freelist(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i])
+	{
+		free(list[i++]);
+	}
+	free (list);
 }
 
 static void	freemem(char **list, t_node *st_a, t_node *st_b, int freeflag)
