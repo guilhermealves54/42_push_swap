@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:40:57 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/03/20 17:01:52 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:56:19 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_node
 
 int		ft_checkerrors(char **list);
 int		sorted(t_node *st_a);
+int		check_list (char **list, int freeflag);
 
 //	Operations
 
@@ -69,10 +70,15 @@ int		sorted(t_node *st_a);
 
 // lib functions
 
+size_t	ft_strlen(const char *str);
 int		ft_atoi(const char *str);
 long	ft_atol(const char *str);
 char	**ft_split(const char *s, char c);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isdigit(int n);
+
+// Memory cleanup
+
+void	freelist(char **list);
 
 #endif

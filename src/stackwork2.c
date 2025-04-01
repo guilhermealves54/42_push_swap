@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 01:20:08 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/06 01:29:47 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:17:34 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,18 @@ int	calc_atarget(t_node *st_a, t_node *st_b, int target_b)
 		i++;
 	}
 	return (target_a);
+}
+
+int	emptystack(t_node *stack)
+{
+	int	i;
+
+	i = 0;
+	while (stack[i].idx != -1)
+	{
+		if (stack[i].filled == 1)
+			return (0);
+		i++;
+	}
+	return (1);
 }

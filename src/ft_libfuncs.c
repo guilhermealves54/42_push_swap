@@ -1,16 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libfuncs.c                                         :+:      :+:    :+:   */
+/*   ft_libfuncs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 01:33:17 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/06 01:34:36 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:02:50 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -59,6 +71,9 @@ long	ft_atol(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i] - 48);
+		if ((neg == 1 && res > INT_MAX)
+			|| (neg == -1 && ((res * -1) < INT_MIN)))
+			return (2147483648);
 		i++;
 	}
 	return (res * neg);

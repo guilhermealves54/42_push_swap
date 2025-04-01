@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:09:25 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/02/06 01:27:53 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:26:12 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,22 @@ int	sorted(t_node *st_a)
 	return (1);
 }
 
-int	emptystack(t_node *stack)
+int	chk_arg(int argc, char **argv)
 {
-	int	i;
+	if (argc == 1)
+		return (-1);
+	if (argc == 2 && argv[1][0] == '\0')
+		return (1);
+	return (0);
+}
 
-	i = 0;
-	while (stack[i].idx != -1)
+int	check_list (char **list, int freeflag)
+{
+	if (ft_checkerrors (list))
 	{
-		if (stack[i].filled == 1)
-			return (0);
-		i++;
+		if (freeflag)
+			freelist (list);
+		return (write (2, "Error\n", 6), 1);
 	}
-	return (1);
+	return (0);
 }

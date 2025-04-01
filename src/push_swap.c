@@ -6,7 +6,7 @@
 /*   By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 00:50:30 by gribeiro          #+#    #+#             */
-/*   Updated: 2025/03/20 14:28:40 by gribeiro         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:55:36 by gribeiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char		**filllist(char **argv, int *argc, int *freeflag);
 static t_node	*fillstack(int argc, char **list, int empty);
-static void		freelist(char **list);
+void			freelist(char **list);
 static void		freemem(char **list, t_node *st_a, t_node *st_b, int freeflag);
 
 int	main(int argc, char **argv)
@@ -25,18 +25,16 @@ int	main(int argc, char **argv)
 	int		freeflag;
 
 	freeflag = 0;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
+	if (argc == 1)
+		return (0);
+	if (argc == 2 && !argv[1][0])
 		return (write (2, "Error\n", 6), 1);
 	argv++;
 	list = argv;
 	if (argc == 2)
 		list = filllist (argv, &argc, &freeflag);
-	if (ft_checkerrors (list))
-	{
-		if (freeflag)
-			freelist (list);
-		return (write (2, "Error\n", 6), 1);
-	}
+	if (check_list (list, freeflag))
+		return (1);
 	st_a = fillstack (argc, list, 0);
 	st_b = fillstack (argc, list, 1);
 	if (st_a == NULL || st_b == NULL)
@@ -88,7 +86,7 @@ static t_node	*fillstack(int argc, char **list, int empty)
 	return (stack);
 }
 
-static void	freelist(char **list)
+void	freelist(char **list)
 {
 	int	i;
 

@@ -6,7 +6,7 @@
 #    By: gribeiro <gribeiro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/09 00:50:36 by gribeiro          #+#    #+#              #
-#    Updated: 2025/03/20 14:17:56 by gribeiro         ###   ########.fr        #
+#    Updated: 2025/04/01 17:57:02 by gribeiro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ visualizer:	$(NAME)
 checker: $(NAME)
 	@if [ ! -f checker_linux ]; then \
 		printf "\033[0;32mDownloading checker_linux...\033[0m"; \
-		curl -o checker_linux https://cdn.intra.42.fr/document/document/31367/checker_linux; \
+		wget https://cdn.intra.42.fr/document/document/32356/checker_linux; \
 		chmod 777 checker_linux; \
 	fi
 
@@ -105,7 +105,7 @@ fclean: clean
 		rm -f checker_linux; \
 	fi
 	@if [ -d push_swap_visualizer ]; then \
-		rm -f push_swap_visualizer; \
+		rm -r -f push_swap_visualizer; \
 	fi
 
 re: fclean all
